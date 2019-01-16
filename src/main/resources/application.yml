@@ -1,3 +1,8 @@
+
 spring:
   messages:
+    #设置国际化资源文件的位置
     basename: i18n/login
+  thymeleaf:
+    #禁用缓存
+    cache: false
