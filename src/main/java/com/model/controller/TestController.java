@@ -25,9 +25,17 @@ public class TestController {
        map.put("a","");
        map.put("b",null);
        map.put("c",2);
-
-
         return map;
+    }
+
+    @ResponseBody
+    @RequestMapping("/test2")
+    public String test2(String name){
+        if(name == null){
+            throw  new RuntimeException("哇哈哈哈哈哈哈哈");
+        }
+
+        return "成功";
     }
 
 }

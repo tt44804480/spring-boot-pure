@@ -6,3 +6,5 @@ spring:
   thymeleaf:
     #禁用缓存
     cache: false
+server:
+  port: 8081
