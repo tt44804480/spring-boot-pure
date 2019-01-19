@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -21,10 +23,22 @@ public class LoginFilter implements Filter{
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         logger.info("login filter doFilter");
+        boolean status = true;
 
-        //进行登录验证
-        servletRequest.getRequestDispatcher("/").forward(servletRequest,servletResponse);
-        //filterChain.doFilter(servletRequest,servletResponse);
+        HttpServletRequest httpServletRequest = (HttpServletRequest)servletRequest;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
+
+        String requestURI = httpServletRequest.getRequestURI();
+        if(requestURI!=null && requestURI.contains("druid")){
+            filterChain.doFilter(servletRequest,servletResponse);
+            status = false;
+        }
+
+        if(status){
+            //进行登录验证
+            httpServletResponse.sendRedirect("/");
+            filterChain.doFilter(servletRequest,servletResponse);
+        }
     }
 
     @Override
