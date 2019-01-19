@@ -1,6 +1,7 @@
 package com.conf;
 
 import com.conf.filter.LoginFilter;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
@@ -18,6 +19,7 @@ import java.util.Arrays;
 @SpringBootApplication
 @ComponentScan("com.model")
 @ComponentScan("com.conf")
+@MapperScan(value = "com.model.dao")
 public class ApplicationContext
 {
     public static void main(String[] args) {

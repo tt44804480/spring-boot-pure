@@ -1,12 +1,16 @@
 package com.model.controller;
 
+import com.model.service.TestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,6 +21,12 @@ import java.util.Map;
 public class TestController {
 
     Logger logger = LoggerFactory.getLogger(TestController.class);
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    TestService service;
 
     @ResponseBody
     @RequestMapping("/test1")
@@ -37,5 +47,22 @@ public class TestController {
 
         return "成功";
     }
+
+    @ResponseBody
+    @RequestMapping("/test3")
+    public List<Map<String, Object>> test3(){
+        String sql = "select * from customer limit 1";
+        List<Map<String, Object>> mapList = jdbcTemplate.queryForList(sql);
+        System.out.println(mapList);
+        return mapList;
+    }
+
+    @ResponseBody
+    @RequestMapping("/getNameById")
+    public List<String> getNameById(String id){
+        return service.getNameById(id);
+    }
+
+
 
 }

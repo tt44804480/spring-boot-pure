@@ -17,3 +17,6 @@ spring:
     active: druid
 server:
   port: 8080
+mybatis:
+  config-location: classpath:com/conf/mybatisConfig.xml
+  mapper-locations: classpath:com/model/mapper/*Sql.xml
