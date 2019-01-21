@@ -1,5 +1,6 @@
 package com.model.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,4 +13,6 @@ import java.util.List;
 public interface TestDao {
 
     public List<String> getNameById(String id);
+
+    public void updateName(@Param("id") String id, @Param("name") String name);
 }

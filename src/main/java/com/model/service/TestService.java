@@ -3,6 +3,7 @@ package com.model.service;
 import com.model.dao.TestDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,5 +21,11 @@ public class TestService {
 
     public List<String> getNameById(String id){
         return dao.getNameById(id);
+    }
+
+    @Transactional
+    public void updateName(String id,String name){
+        dao.updateName(id,name);
+        System.out.println(1/0);
     }
 }

@@ -1,5 +1,6 @@
 package com.model.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.model.service.TestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,9 +61,17 @@ public class TestController {
     @ResponseBody
     @RequestMapping("/getNameById")
     public List<String> getNameById(String id){
-        return service.getNameById(id);
+        PageHelper.startPage(1,10);
+        List<String> list = service.getNameById(id);
+        return list;
     }
 
+    @ResponseBody
+    @RequestMapping("/updateName")
+    public String updateName(String id,String name){
+        service.updateName(id,name);
+        return "success";
+    }
 
 
 }

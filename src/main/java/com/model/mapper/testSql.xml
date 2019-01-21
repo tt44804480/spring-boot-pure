@@ -3,7 +3,14 @@
 <mapper namespace="com.model.dao.TestDao">
 
     <select id="getNameById" parameterType="String" resultType="String">
-        select cus_account from customer where cus_id = #{cus_id}
+        select cus_account from customer
+        <if test="_parameter != null">
+            where cus_id = #{cus_id}
+        </if>
     </select>
+
+    <update id="updateName" parameterType="map">
+        update wahaha set name = #{name} where id =#{id}
+    </update>
 
 </mapper>

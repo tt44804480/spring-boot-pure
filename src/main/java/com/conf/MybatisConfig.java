@@ -10,7 +10,8 @@ import sun.awt.SunHints;
  * @author liutianyang
  * @create 2019-01-2019/1/19
  */
-@MapperScan(value = "com.model.mapper.*Sql.xml")//@org.springframework.context.annotation.Configuration
+@MapperScan(value = "com.model.dao")
+@org.springframework.context.annotation.Configuration
 public class MybatisConfig {
 
     /**

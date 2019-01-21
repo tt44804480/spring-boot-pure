@@ -19,7 +19,7 @@ import java.util.Arrays;
 @SpringBootApplication
 @ComponentScan("com.model")
 @ComponentScan("com.conf")
-@MapperScan(value = "com.model.dao")
+//@MapperScan(value = "com.model.dao")
 public class ApplicationContext
 {
     public static void main(String[] args) {
