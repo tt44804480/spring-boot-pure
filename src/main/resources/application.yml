@@ -10,11 +10,25 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     password: 1234
     username: root
-    url: jdbc:mysql://localhost:3306/test
+    url: jdbc:mysql://localhost:3306/zj
+#    password: 123456
+#    username: test
+#    url: jdbc:mysql://172.16.105.232:3306/olzh?useUnicode=true&characterEncoding=utf-8&useSSL=true
     driver-class-name: com.mysql.jdbc.Driver
+
  #引入druid数据源
   profiles:
     active: druid
+  redis:
+    database: 0
+    host: 47.98.154.83
+    port: 6379
+    pool:
+      max-active: 8
+      max-wait: 1
+      max-idle: 8
+      min-idle: 0
+    timeout: 0
 server:
   port: 8080
 mybatis:
@@ -27,3 +41,8 @@ pagehelper:
     reasonable: true
     supportMethodsArguments: true
     params: count=countSql
+logging:
+  level:
+   com.model.dao: debug
+
+
