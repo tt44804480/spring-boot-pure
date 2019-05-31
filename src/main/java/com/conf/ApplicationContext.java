@@ -8,9 +8,12 @@ import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomi
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.servlet.LocaleResolver;
 
 import java.util.Arrays;
+import java.util.concurrent.Executor;
 
 /**
  * @author liutianyang
@@ -19,6 +22,7 @@ import java.util.Arrays;
 @SpringBootApplication
 @ComponentScan("com.model")
 @ComponentScan("com.conf")
+@EnableAsync
 //@MapperScan(value = "com.model.dao")
 public class ApplicationContext
 {
@@ -54,6 +58,13 @@ public class ApplicationContext
         registrationBean.setFilter(new LoginFilter());
         registrationBean.setUrlPatterns(Arrays.asList("*.html"));
         return registrationBean;
+    }
+
+    @Bean(name = "taskExecutor")
+    public Executor taskExecutor(){
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(10);
+        return executor;
     }
 
 
