@@ -43,6 +43,6 @@ pagehelper:
     params: count=countSql
 logging:
   level:
-   com.model.dao: debug
+   com.model: debug
 
 
