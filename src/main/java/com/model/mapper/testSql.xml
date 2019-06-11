@@ -10,7 +10,7 @@
     </select>
 
     <update id="updateName" parameterType="map">
-        update student set name = #{name} where id =#{id}
+        update zh_attachment set path = #{name} where id =#{id}
     </update>
 
 </mapper>

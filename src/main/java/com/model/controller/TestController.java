@@ -61,6 +61,7 @@ public class TestController {
     @ResponseBody
     @RequestMapping("/getNameById")
     public List<String> getNameById(String id){
+        logger.info("我是getNameById");
         PageHelper.startPage(1,10);
         List<String> list = service.getNameById(id);
         return list;

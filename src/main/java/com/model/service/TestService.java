@@ -26,6 +26,5 @@ public class TestService {
     @Transactional
     public void updateName(String id,String name){
         dao.updateName(id,name);
-        System.out.println(1/0);
     }
 }
