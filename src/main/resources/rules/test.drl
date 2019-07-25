@@ -1,0 +1,22 @@
+package rules;
+import com.model.entity.student;
+dialect  "java"
+
+rule "test"
+no-loop true
+    when
+        $d : student();
+    then
+        System.out.println("aaa");
+        $d.setAge(24);
+        update($d);
+end
+
+rule "test1"
+no-loop true
+lock-on-active true
+    when
+        $d : student();
+    then
+        System.out.println("bbb");
+end
