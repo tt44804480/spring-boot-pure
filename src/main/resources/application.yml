@@ -21,7 +21,7 @@ spring:
     active: druid
   redis:
     database: 0
-    host: 47.98.154.83
+    host: localhost
     port: 6379
     pool:
       max-active: 8
@@ -29,6 +29,11 @@ spring:
       max-idle: 8
       min-idle: 0
     timeout: 0
+  data:
+    mongodb:
+      database: hello
+      authentication-database: admin
+      uri: mongodb://localhost:27017
 server:
   port: 8080
 mybatis:
