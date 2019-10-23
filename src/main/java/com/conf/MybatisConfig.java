@@ -1,10 +1,11 @@
 package com.conf;
 
 import org.apache.ibatis.session.Configuration;
-import org.mybatis.spring.annotation.MapperScan;
+import org.apache.ibatis.type.TypeHandlerRegistry;
 import org.mybatis.spring.boot.autoconfigure.ConfigurationCustomizer;
 import org.springframework.context.annotation.Bean;
 import sun.awt.SunHints;
+import tk.mybatis.spring.annotation.MapperScan;
 
 /**
  * @author liutianyang
@@ -23,7 +24,6 @@ public class MybatisConfig {
         return new ConfigurationCustomizer() {
             @Override
             public void customize(Configuration configuration) {
-
             }
         };
     }

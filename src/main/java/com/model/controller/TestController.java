@@ -1,12 +1,14 @@
 package com.model.controller;
 
 import com.github.pagehelper.PageHelper;
+import com.model.entity.Student;
 import com.model.service.TestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -74,5 +76,22 @@ public class TestController {
         return "success";
     }
 
+    @ResponseBody
+    @GetMapping("/test/transactionalEventListener")
+    public void testTransactionalEventListener(){
+        service.testTransactionalEventListener();
+    }
+
+    @ResponseBody
+    @GetMapping("/test/basemapper")
+    public List<Student> testBaseMapper(){
+        return service.testBaseMapper();
+    }
+
+    @ResponseBody
+    @GetMapping("/test/insert/base/mapper")
+    public void testInsertBaseMapper(){
+        service.testInsertBaseMapper();
+    }
 
 }

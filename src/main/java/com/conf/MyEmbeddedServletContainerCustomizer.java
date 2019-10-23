@@ -15,6 +15,6 @@ public class MyEmbeddedServletContainerCustomizer implements EmbeddedServletCont
      */
     @Override
     public void customize(ConfigurableEmbeddedServletContainer configurableEmbeddedServletContainer) {
-        configurableEmbeddedServletContainer.setPort(8088);
+        //configurableEmbeddedServletContainer.setPort(8088);
     }
 }
