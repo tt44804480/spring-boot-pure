@@ -1,11 +1,11 @@
 package rules;
-import com.model.entity.student;
+import com.model.entity.Student;
 dialect  "java"
 
 rule "test"
 no-loop true
     when
-        $d : student();
+        $d : Student();
     then
         System.out.println("aaa");
         $d.setAge(24);
@@ -16,7 +16,7 @@ rule "test1"
 no-loop true
 lock-on-active true
     when
-        $d : student();
+        $d : Student();
     then
         System.out.println("bbb");
 end
