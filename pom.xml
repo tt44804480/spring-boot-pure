@@ -18,6 +18,8 @@
 		<java.version>1.8</java.version>
 		<thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
 		<thymeleaf-layout-dialect.version>2.2.2</thymeleaf-layout-dialect.version>
+		<activemq.version>5.15.9</activemq.version>
+		<xbean-spring.version>3.16</xbean-spring.version>
 	</properties>
 
 	<dependencies>
@@ -156,6 +158,28 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
+
+		<!--activemq-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-activemq</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-pool</artifactId>
+		</dependency>
+
+		<!--mybatis通用mapper依赖-->
+		<dependency>
+			<groupId>tk.mybatis</groupId>
+			<artifactId>mapper-spring-boot-starter</artifactId>
+			<version>1.2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+		</dependency>
 
 	</dependencies>
 
