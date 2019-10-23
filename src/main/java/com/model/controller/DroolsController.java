@@ -1,8 +1,7 @@
 package com.model.controller;
 
-import com.model.entity.student;
+import com.model.entity.Student;
 import com.model.service.DroolsService;
-import com.model.utils.KieSessionUtils;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +37,7 @@ public class DroolsController {
     @ResponseBody
     @RequestMapping("/test2")
     public String test2(){
-        student student = new student();
+        Student student = new Student();
         student.setAge(23);
         kieSession.insert(student);
         kieSession.fireAllRules();

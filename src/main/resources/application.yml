@@ -1,4 +1,5 @@
-
+server:
+  port: 8080
 spring:
   messages:
     #设置国际化资源文件的位置
@@ -10,12 +11,11 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     password: 1234
     username: root
-    url: jdbc:mysql://localhost:3306/zj
+    url: jdbc:mysql://localhost:3306/zj?useUnicode=true&characterEncoding=UTF8&useSSL=true&allowMultiQueries=true
 #    password: 123456
 #    username: test
 #    url: jdbc:mysql://172.16.105.232:3306/olzh?useUnicode=true&characterEncoding=utf-8&useSSL=true
     driver-class-name: com.mysql.jdbc.Driver
-
  #引入druid数据源
   profiles:
     active: druid
@@ -34,10 +34,23 @@ spring:
       database: hello
       authentication-database: admin
       uri: mongodb://localhost:27017
-server:
-  port: 8080
+  #activemq:
+    #broker-url: tcp://192.168.131.128:61616
+   # user: admin
+    #password: admin
+    #pool:
+      #true表示使用连接池
+     # enabled: true
+      #连接池最大连接数
+      #max-connections: 5
+      #空闲的连接过期时间，默认为30秒
+     # idle-timeout: 3000
+   # in-memory: false
+  #jms:
+   # pub-sub-domain: false # false = queue ,true = topic
+
 mybatis:
-  #config-location: classpath:com/conf/mybatisConfig.xml(用配置类代替--MybatisConfig类)
+  config-location: classpath:com/conf/mybatisConfig.xml  #(用配置类代替--MybatisConfig类)
   mapper-locations: classpath:com/model/mapper/*Sql.xml
 
 #pagehelper分页插件
@@ -49,5 +62,8 @@ pagehelper:
 logging:
   level:
    com.model: debug
+mapper:
+  mappers: com.model.base.BaseMappers
+  identity: MYSQL
 
 

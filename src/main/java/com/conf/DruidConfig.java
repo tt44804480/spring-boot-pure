@@ -1,18 +1,21 @@
 package com.conf;
 
+import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
+import com.alibaba.druid.wall.WallConfig;
+import com.alibaba.druid.wall.WallFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 import javax.sql.DataSource;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author liutianyang
@@ -21,6 +24,9 @@ import java.util.Map;
 @Configuration
 public class DruidConfig {
 
+    @Autowired
+    WallFilter wallFilter;
+
     /**
      * 注册我们自己的数据源
      * @return
@@ -28,7 +34,33 @@ public class DruidConfig {
     @ConfigurationProperties(prefix = "spring.datasource")
     @Bean
     public DataSource druid(){
-        return new DruidDataSource();
+        DruidDataSource druidDataSource = new DruidDataSource();
+
+//在设置之前先判断是都已经存在WallConfig，如果有，直接将现有的替换掉
+
+        List<Filter> filterList = new ArrayList<Filter>();
+        List<Filter> filters = druidDataSource.getProxyFilters();
+
+        boolean isExist = false;
+
+        for(Filter filter:filters){
+
+            if(filter instanceof WallFilter){
+
+                ((WallFilter)filter).setConfig(wallConfig());
+
+                isExist = true;
+
+            }
+
+        }
+
+        if(!isExist){
+            filterList.add(wallFilter);
+            druidDataSource.setProxyFilters(filterList);
+
+        }
+        return druidDataSource;
     }
 
     /**
@@ -62,4 +94,31 @@ public class DruidConfig {
         bean.setUrlPatterns(Arrays.asList("/*"));
         return bean;
     }
+
+    @Bean(name = "wallFilter")
+    @DependsOn("wallConfig")
+    public WallFilter wallFilter(WallConfig wallConfig) {
+
+        WallFilter wallFilter = new WallFilter();
+
+        wallFilter.setConfig(wallConfig);
+
+        return wallFilter;
+
+    }
+
+
+    @Bean(name = "wallConfig")
+    public WallConfig wallConfig() {
+
+        WallConfig wallConfig = new WallConfig();
+
+        wallConfig.setMultiStatementAllow(true);// 允许一次执行多条语句
+
+        wallConfig.setNoneBaseStatementAllow(true);// 允许一次执行多条语句
+
+        return wallConfig;
+
+    }
+
 }
