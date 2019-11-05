@@ -16,6 +16,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 @Configuration
 @EnableCaching//开启注解
@@ -63,5 +65,17 @@ public class RedisConfig {
         StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
         stringRedisTemplate.setConnectionFactory(factory);
         return stringRedisTemplate;
+    }
+
+    @Bean
+    public JedisPool jedisPool(){
+        String ip = "localhost";
+        int port = 6379;
+        JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
+        jedisPoolConfig.setMaxTotal(8);
+        jedisPoolConfig.setMaxIdle(1);
+        jedisPoolConfig.setMaxWaitMillis(-1);
+
+        return new JedisPool(jedisPoolConfig, ip, port, 10000);
     }
 }
